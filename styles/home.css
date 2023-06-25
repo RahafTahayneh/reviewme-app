@@ -1,0 +1,56 @@
+.custom-button {
+  background-color: #708090;
+  font-size: 14px;
+  font-weight: 500;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  line-height: 16px;
+}
+
+.secondary {
+  background-color: transparent;
+  border: 1.5px #708090 solid;
+  color: #708090;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.animation {
+  display: flex;
+  justify-content: center;
+}
+
+.custom-animation {
+  max-width: 600px;
+}
+.header {
+  color: #708090;
+}
+
+.header:hover {
+  color: #2a3439;
+}
+
+.welcome {
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  padding: 32px;
+  background-color: white;
+}
+
+.welcome-text {
+  color: #696969;
+}
+
+.ternary-btn {
+  background-color: transparent;
+  color: black;
+  font-weight: 400;
+  font-size: 16px;
+}
