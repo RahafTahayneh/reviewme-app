@@ -4,4 +4,6 @@ export type User = {
   username: string;
   password: string;
   email: string;
+  asset?: string;
+  id: string;
 };

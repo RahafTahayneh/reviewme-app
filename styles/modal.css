@@ -1,0 +1,16 @@
+.ModalContent {
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.ScrollableContent {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+@media only screen and (max-width: 1000px) {
+  .ModalContent {
+    margin: 20px;
+    padding: 16px;
+  }
+}

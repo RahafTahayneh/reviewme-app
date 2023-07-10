@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { User } from "@/types/user";
 import { register, signin } from "@/lib/api";
-import Card from "./Card";
+import AuthCard from "./AuthCard";
 import Button from "./Button";
 import Input from "./Input";
 
@@ -60,7 +60,7 @@ const AuthForm = ({ mode }: { mode: "register" | "signin" }) => {
 
   const content = mode === "register" ? registerContent : signinContent;
   return (
-    <Card>
+    <AuthCard>
       <div className="w-full">
         <div className="text-center">
           <h2 className="text-3xl mb-2">{content.header}</h2>
@@ -144,7 +144,7 @@ const AuthForm = ({ mode }: { mode: "register" | "signin" }) => {
               <span>
                 <Link
                   href={content.linkUrl}
-                  className="text-blue-600 font-bold"
+                  className="text-gray-600 font-bold"
                 >
                   {content.linkText}
                 </Link>
@@ -156,7 +156,7 @@ const AuthForm = ({ mode }: { mode: "register" | "signin" }) => {
           </div>
         </form>
       </div>
-    </Card>
+    </AuthCard>
   );
 };
 

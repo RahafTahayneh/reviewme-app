@@ -14,18 +14,18 @@ const verifyJWT = async (jwt: string) => {
 
 export default async function middleware(req, res) {
   const { pathname } = req.nextUrl;
+  const jwt = req.cookies.get("token");
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/static") ||
     pathname.startsWith("/signin") ||
     pathname.startsWith("/register") ||
+    pathname.startsWith("/home") ||
     PUBLIC_FILE.test(pathname)
   ) {
     return NextResponse.next();
   }
-
-  const jwt = req.cookies.get(process.env.COOKIE_NAME);
 
   if (!jwt) {
     req.nextUrl.pathname = "/signin";
@@ -34,7 +34,8 @@ export default async function middleware(req, res) {
 
   try {
     await verifyJWT(jwt.value);
-    return NextResponse.next();
+    req.nextUrl.pathname = "/home";
+    return NextResponse.redirect(req.nextUrl);
   } catch (e) {
     console.error(e);
     req.nextUrl.pathname = "/signin";

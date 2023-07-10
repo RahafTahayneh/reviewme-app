@@ -3,7 +3,7 @@ import { User } from "@/types/user";
 type Fetcher = {
   url: string;
   method: string;
-  body: object;
+  body?: any;
   json: boolean;
 };
 
@@ -46,5 +46,50 @@ export const signin = async ({ ...props }: User) =>
     url: "/api/signin",
     method: "POST",
     body: props,
+    json: false,
+  });
+
+export const getAllReviews = async () =>
+  await fetcher({
+    url: "/api/review?type=all",
+    method: "GET",
+    json: false,
+  });
+
+export const getReviewById = async (id: string) =>
+  await fetcher({
+    url: `/api/review?type=byId&id=${id}`,
+    method: "GET",
+    json: false,
+  });
+
+export const getUserReviews = async () =>
+  await fetcher({
+    url: `/api/review?type=user`,
+    method: "GET",
+    json: false,
+  });
+
+export const getUser = async (id: string) =>
+  await fetcher({
+    url: `/api/user`,
+    method: "GET",
+    body: { id },
+    json: false,
+  });
+
+export const updateReviewById = async ({
+  id,
+  title,
+  feedback,
+}: {
+  id: string;
+  title: string;
+  feedback: string;
+}) =>
+  await fetcher({
+    url: `/api/review`,
+    method: "PUT",
+    body: { id, title, feedback },
     json: false,
   });

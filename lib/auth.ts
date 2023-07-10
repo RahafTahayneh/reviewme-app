@@ -31,15 +31,26 @@ export const validateJWT = async (jwt: string) => {
 };
 
 export const getUserFromCookie = async (cookies) => {
-  const jwt = cookies.get(process.env.COOKIE_NAME);
+  const jwt = cookies.get("token");
+
+  if (jwt) {
+    const { id } = await validateJWT(jwt.value);
+
+    const user = await db.user.findUnique({
+      where: {
+        id: id as string,
+      },
+    });
+
+    return user;
+  }
+  return undefined;
+};
+
+export const isLoggedInUser = async (cookies, belongsToId: string) => {
+  const jwt = cookies.get("token");
 
   const { id } = await validateJWT(jwt.value);
 
-  const user = await db.user.findUnique({
-    where: {
-      id: id as string,
-    },
-  });
-
-  return user;
+  return id === belongsToId;
 };

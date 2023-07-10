@@ -26,12 +26,13 @@ export default async function signin(
       const jwt = await createJWT(user.id, user.username);
       res.setHeader(
         "Set-Cookie",
-        serialize(process.env.COOKIE_NAME, jwt, {
+        serialize("token", jwt, {
           httpOnly: true,
           path: "/",
           maxAge: 60 * 60 * 24 * 7,
         })
       );
+
       res.status(201);
       res.end();
     } else {

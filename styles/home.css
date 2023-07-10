@@ -54,3 +54,42 @@
   font-weight: 400;
   font-size: 16px;
 }
+
+.dot {
+  background-color: #7c7c78;
+}
+.user {
+  color: #7c7c78;
+}
+
+.image-container {
+}
+.image-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  background-color: gray;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 1000px) {
+  .welcome {
+    overflow: hidden;
+    padding: 16px;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .header-text {
+    font-size: 24px;
+    width: unset;
+  }
+
+  .header-content {
+    width: unset;
+  }
+}
