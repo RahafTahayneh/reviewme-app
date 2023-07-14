@@ -43,12 +43,6 @@ const Card = ({
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // await createNewProject(name);
-    closeModal();
-  };
-
   const isSameLoggedInUser = review?.belongsToId === user?.id;
 
   return (
@@ -60,7 +54,10 @@ const Card = ({
         )}
       >
         <div className={" h-[200px] w-full mb-4 "}>
-          <img src={review?.product?.images[0]} className="image-card" />
+          <img
+            src={`https://res.cloudinary.com/dgtvnojwb/v${review?.image?.version}/${review?.image?.publicId}.${review?.image?.format}`}
+            className="image-card"
+          />
         </div>
         <div>
           <div className="font-bold text-lg">{review?.title}</div>
@@ -77,7 +74,7 @@ const Card = ({
               <div className="flex flex-row items-center pb-2">
                 <div className="dot rounded-full h-1 w-1 mx-1" />
                 <div className="text-sm user whitespace-nowrap">
-                  {review.product.storeName}
+                  {review.storeName}
                 </div>
                 <div className="rounded-full h-1 w-1 ml-2 dot" />
                 <div className="text-sm user text-left mx-1 whitespace-nowrap">
@@ -95,7 +92,7 @@ const Card = ({
               </div>
               <div className="dot rounded-full h-1 w-1 mx-1" />
               <div className="text-sm user whitespace-nowrap">
-                {review?.product.storeName}
+                {review?.storeName}
               </div>
               <div className="rounded-full h-1 w-1 ml-2 dot" />
               <div className="text-sm user text-left mx-1 whitespace-nowrap">
@@ -104,7 +101,7 @@ const Card = ({
             </div>
           )}
           <div>
-            <StarRating rating={4.3} />
+            <StarRating rating={Number(review.rate)} />
           </div>
           <div className="text-gray-700 text-sm mt-2 mb-8">
             {review?.feedback}
@@ -122,6 +119,7 @@ const Card = ({
           review={review}
           closeModal={closeModal}
           isSameUser={isSameLoggedInUser}
+          imgLink={`https://res.cloudinary.com/dgtvnojwb/v${review?.image?.version}/${review?.image?.publicId}.${review?.image?.format}`}
         />
       )}
     </>

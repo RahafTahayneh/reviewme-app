@@ -8,16 +8,17 @@ export type Review = {
   updatedAt: Date;
   rate: string;
   belongsToId: string;
-  productId: string;
+  productName: string;
+  productLink: string;
+  image: ReviewImage;
+  storeProductId?: string;
+  storeName: string;
   user: User;
-  product: Product;
 };
 
-type Product = {
+type ReviewImage = {
   id: string;
-  name: string;
-  images: string[];
-  storeProductId: string;
-  link: string;
-  storeName: string;
+  format: string;
+  publicId: string;
+  version: string;
 };

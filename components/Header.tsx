@@ -14,15 +14,17 @@ const Header = ({ user }) => {
   };
 
   return (
-    <header className="flex flex-row items-center justify-between pb-4 primaryText">
+    <header className="flex flex-row items-center justify-between px-4 primaryText">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
-          <h1 className="text-xl font-bold ml-2 header font-custom">
-            Review me.
-          </h1>
+          <Link href="/home" legacyBehavior>
+            <h1 className="text-xl font-bold ml-2 header font-custom cursor-pointer">
+              Review me.
+            </h1>
+          </Link>
         </div>
         <div className=" flex items-center hidden sm:flex sm:space-x-4">
-          <Link href="/" legacyBehavior>
+          <Link href="/home" legacyBehavior>
             <a href="#" className="text-gray-400 hover:text-gray-700">
               Home
             </a>
@@ -40,12 +42,14 @@ const Header = ({ user }) => {
         </div>
         <div className="flex flex-row items-center">
           {!!user?.id ? (
-            <div className="flex flex-row items-center cursor-pointer">
-              <div className="text-[14px] text-gray-400 hover:text-gray-700 mx-2">
-                My Reviews
+            <Link href={"/myreviews"} prefetch>
+              <div className="flex flex-row items-center cursor-pointer">
+                <div className="text-[14px] text-gray-400 hover:text-gray-700 mx-2">
+                  My Reviews
+                </div>
+                <BsPersonCircle size={24} className="text-gray-400" />
               </div>
-              <BsPersonCircle size={24} className="text-gray-400" />
-            </div>
+            </Link>
           ) : (
             <button className="custom-button text-white px-4 py-2 rounded">
               <Link href="/signin">Sign In</Link>
@@ -61,8 +65,8 @@ const Header = ({ user }) => {
         </div>
       </div>
       {isSidebarOpen && (
-        <div className=" bar sm:hidden">
-          <Link href="/" legacyBehavior>
+        <div className=" bar sm:hidden z-10">
+          <Link href="/home" legacyBehavior prefetch>
             <a
               href="#"
               className="block text-gray-400 py-2 hover:text-gray-700"

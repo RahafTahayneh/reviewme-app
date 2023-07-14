@@ -5,18 +5,18 @@ import { getUserFromCookie } from "@/lib/auth";
 import { cookies } from "next/headers";
 import Footer from "@/components/Footer";
 
-const RootLayout = async ({ children }: { children: ReactNode }) => {
+const RootReviewLayout = async ({ children }: { children: ReactNode }) => {
   const user = await getUserFromCookie(cookies());
 
   return (
     <html lang="en">
       <head />
-      <body className="h-screen w-screen home  flex flex-col">
+      <body className="h-screen w-screen home flex flex-col">
         <div className="p-6">
           <Header user={user} />
         </div>
         <div className="px-6">{children}</div>
-        <div className="">
+        <div>
           <Footer />
         </div>
         <div id="modal"></div>
@@ -26,4 +26,4 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default RootLayout;
+export default RootReviewLayout;

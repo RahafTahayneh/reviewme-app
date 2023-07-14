@@ -1,4 +1,5 @@
 import Button from "@/components/Button";
+import Link from "next/link";
 import LottieAnimation from "@/components/LottieAnimation";
 import welcomeAnimation from "@/public/welcome_animation.json";
 import "@/styles/home.css";
@@ -8,6 +9,7 @@ import { delay } from "@/lib/async";
 import { getUserFromCookie } from "@/lib/auth";
 import { cookies } from "next/headers";
 import { db } from "@/lib/db";
+import NewReview from "@/components/NewReview";
 
 const getData = async () => {
   await delay(2000);
@@ -16,7 +18,7 @@ const getData = async () => {
     orderBy: { createdAt: "desc" },
     include: {
       user: true, // Include the related user object
-      product: true,
+      image: true,
     },
   });
 
@@ -39,23 +41,22 @@ export default async function Page() {
             valuable insights for online shoppers worldwide.
           </div>
           <div>
-            <Button className="custom-button flex flex-row items-center">
-              <BiPlus size={18} className="mr-1" /> Submit Review
-            </Button>
+            <NewReview user={user} pageLink="/home" />
           </div>
         </div>
         <div className="animation">
-          <LottieAnimation animationData={welcomeAnimation} />
+          <LottieAnimation animationData={welcomeAnimation} className="" />
         </div>
       </div>
       <div className="flex mt-10 flex-col flex-start">
         <div className="flex flex-row items-center justify-between">
           <div className="text-3xl font-bold">Recently Added </div>
-          <div>
+          <Link href={"/allreviews"}>
             <Button className="ternary-btn flex flex-row items-center">
-              Show All <BiRightArrowAlt size={24} />
+              Show All
+              <BiRightArrowAlt size={24} />
             </Button>
-          </div>
+          </Link>
         </div>
         <div className="flex flex-row items-center pt-8 flex flex-wrap -mx-4">
           {reviews.map((review) => (

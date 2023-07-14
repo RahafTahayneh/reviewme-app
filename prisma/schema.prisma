@@ -25,26 +25,28 @@ model User {
 }
 
 model Review {
-  id          String   @id @default(uuid())
-  title       String   @db.VarChar(255)
-  feedback    String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  rate        Decimal
-  belongsToId String
-  productId   String   @unique
-  product     Product  @relation(fields: [productId], references: [id])
-  user        User     @relation(fields: [belongsToId], references: [id])
+  id             String      @id @default(uuid())
+  title          String      @db.VarChar(255)
+  feedback       String
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  rate           String
+  image          ReviewImage @relation(fields: [reviewImageId], references: [id])
+  belongsToId    String
+  user           User        @relation(fields: [belongsToId], references: [id])
+  reviewImageId  String      @unique
+  productName    String
+  productLink    String
+  storeName      String
+  storeProductId String?
 
   @@unique([id, belongsToId])
 }
 
-model Product {
-  id             String   @id @default(uuid())
-  name           String
-  images         String[]
-  storeProductId String?
-  link           String
-  storeName      String
-  Review         Review?
+model ReviewImage {
+  id       String  @id @default(cuid())
+  publicId String  @unique
+  format   String
+  version  String
+  review   Review?
 }

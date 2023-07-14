@@ -93,3 +93,47 @@ export const updateReviewById = async ({
     body: { id, title, feedback },
     json: false,
   });
+
+export const createNewReview = async ({
+  title,
+  feedback,
+  productName,
+  productLink,
+  storeName,
+  imageId,
+  customStore,
+  rate,
+  storeProductId,
+}: {
+  title: string;
+  feedback: string;
+  productName: string;
+  productLink: string;
+  storeName: string;
+  imageId: string;
+  customStore: string;
+  rate: number;
+  storeProductId?: string;
+}) =>
+  await fetcher({
+    url: `/api/review`,
+    method: "POST",
+    body: {
+      title,
+      feedback,
+      productName,
+      storeName,
+      productLink,
+      imageId,
+      customStore,
+      rate,
+      storeProductId,
+    },
+    json: false,
+  });
+
+export const uploadImage = async (formData: FormData) =>
+  await fetch("/api/upload", {
+    method: "POST",
+    body: formData,
+  });

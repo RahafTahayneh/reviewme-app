@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Review" ALTER COLUMN "rate" SET DATA TYPE TEXT;

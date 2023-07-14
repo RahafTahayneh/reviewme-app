@@ -11,7 +11,6 @@ import "@/styles/modal.css";
 import StarRating from "./StarRating";
 import UserProfile from "./UserProfile";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import Carousel from "./Carousel";
 import { updateReviewById } from "@/lib/api";
 
 Modal.setAppElement("#modal");
@@ -20,9 +19,11 @@ const ReviewModal = ({
   review,
   closeModal,
   isSameUser,
+  imgLink,
 }: {
   isSameUser: boolean;
   review: Review;
+  imgLink: string;
   closeModal: () => void;
 }) => {
   const [title, setTitle] = useState(review?.title);
@@ -46,12 +47,11 @@ const ReviewModal = ({
       setIsEditing(false);
       return;
     }
-    const updatedReview = await updateReviewById({
+    await updateReviewById({
       id: review.id,
       title,
       feedback,
     });
-    console.log(updatedReview);
     setIsEditing(false);
   };
 
@@ -63,7 +63,7 @@ const ReviewModal = ({
       className="modal"
       ariaHideApp={false}
     >
-      <div className="modalBody flex flex-col p-10 bg-white rounded-2xl ModalContent md:w-full">
+      <div className="modalBody flex flex-col p-10 bg-white rounded-2xl ModalContent">
         <div className="bg-white">
           <div className="flex flex-row items-center justify-between mb-2">
             <div>
@@ -117,27 +117,23 @@ const ReviewModal = ({
           </div>
         </div>
         <div className="flex flex-col ScrollableContent">
-          <div className="flex flex-row items-center justify-center h-[200px]">
-            <Carousel
-              images={review.product.images}
-              className="w-[500px] h-[200px]"
-              showControls
-            />
+          <div className="flex flex-row items-center justify-center h-[600px]">
+            <img src={imgLink} className="image-card max-w-[400px]" />
           </div>
           <div className="flex flex-col border-b-2 border-gray-300 border-opacity-50 pb-4 mt-2">
             <div className="flex flex-row items-center my-2">
               <div className="text-md text-gray-300 mr-10 w-[100px]">Store</div>
-              <div className="text-md">{review.product.storeName}</div>
+              <div className="text-md">{review.storeName}</div>
             </div>
             <div className="flex flex-row items-center my-2">
               <div className="text-md text-gray-300 mr-10 w-[100px]">
                 Product Link
               </div>
               <div className="text-md overflow-ellipsis whitespace-nowrap overflow-hidden max-w-[200px] mr-8">
-                {review.product.link}
+                {review.productLink}
               </div>
               <div>
-                <Link href={review.product.link} legacyBehavior>
+                <Link href={review.productLink} legacyBehavior>
                   <a target="_blank" rel="noopener noreferrer">
                     <FaExternalLinkAlt />
                   </a>
@@ -152,7 +148,7 @@ const ReviewModal = ({
             </div>
           </div>
           <div className="flex flex-col border-opacity-50 py-6">
-            <div className="text-md mr-10 w-[100px]">Feedback</div>
+            <div className="text-xl mr-10 w-[100px]">Feedback</div>
             {isEditing ? (
               <textarea
                 className="border border-gray-300 rounded px-2 py-1 mt-2"

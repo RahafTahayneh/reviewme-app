@@ -3,7 +3,7 @@ import { jwtVerify } from "jose";
 const PUBLIC_FILE = /\.(.*)$/;
 
 // had to make this again here as the other one is in a file with bcrypt which is not supported on edge runtimes
-const verifyJWT = async (jwt: string) => {
+const verifyJWT = async (jwt) => {
   const { payload } = await jwtVerify(
     jwt,
     new TextEncoder().encode(process.env.JWT_SECRET)
@@ -14,7 +14,6 @@ const verifyJWT = async (jwt: string) => {
 
 export default async function middleware(req, res) {
   const { pathname } = req.nextUrl;
-  const jwt = req.cookies.get("token");
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -22,10 +21,14 @@ export default async function middleware(req, res) {
     pathname.startsWith("/signin") ||
     pathname.startsWith("/register") ||
     pathname.startsWith("/home") ||
+    pathname.startsWith("/about") ||
+    pathname.startsWith("/contact") ||
     PUBLIC_FILE.test(pathname)
   ) {
     return NextResponse.next();
   }
+
+  const jwt = req.cookies.get("token");
 
   if (!jwt) {
     req.nextUrl.pathname = "/signin";
@@ -34,8 +37,7 @@ export default async function middleware(req, res) {
 
   try {
     await verifyJWT(jwt.value);
-    req.nextUrl.pathname = "/home";
-    return NextResponse.redirect(req.nextUrl);
+    return NextResponse.next();
   } catch (e) {
     console.error(e);
     req.nextUrl.pathname = "/signin";

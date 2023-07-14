@@ -23,21 +23,23 @@ CREATE TABLE "Review" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "rate" DECIMAL(65,30) NOT NULL,
     "belongsToId" TEXT NOT NULL,
-    "productId" TEXT NOT NULL,
+    "reviewImageId" TEXT NOT NULL,
+    "productName" TEXT NOT NULL,
+    "productLink" TEXT NOT NULL,
+    "storeName" TEXT NOT NULL,
+    "storeProductId" TEXT,
 
     CONSTRAINT "Review_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Product" (
+CREATE TABLE "ReviewImage" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "images" TEXT[],
-    "storeProductId" TEXT,
-    "link" TEXT NOT NULL,
-    "storeName" TEXT NOT NULL,
+    "publicId" TEXT NOT NULL,
+    "format" TEXT NOT NULL,
+    "version" TEXT NOT NULL,
 
-    CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "ReviewImage_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -47,13 +49,16 @@ CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Review_productId_key" ON "Review"("productId");
+CREATE UNIQUE INDEX "Review_reviewImageId_key" ON "Review"("reviewImageId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Review_id_belongsToId_key" ON "Review"("id", "belongsToId");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "ReviewImage_publicId_key" ON "ReviewImage"("publicId");
+
 -- AddForeignKey
-ALTER TABLE "Review" ADD CONSTRAINT "Review_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Review" ADD CONSTRAINT "Review_reviewImageId_fkey" FOREIGN KEY ("reviewImageId") REFERENCES "ReviewImage"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Review" ADD CONSTRAINT "Review_belongsToId_fkey" FOREIGN KEY ("belongsToId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

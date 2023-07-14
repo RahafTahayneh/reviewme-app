@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import lottie from "lottie-web";
+import clsx from "clsx";
 
-const LottieAnimation = ({ animationData }) => {
+const LottieAnimation = ({ animationData, className }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,7 +23,10 @@ const LottieAnimation = ({ animationData }) => {
   }, [animationData]);
 
   return (
-    <div className="w-full h-full flex custom-animation" ref={containerRef} />
+    <div
+      className={clsx("w-full h-full flex custom-animation", className)}
+      ref={containerRef}
+    />
   );
 };
 
