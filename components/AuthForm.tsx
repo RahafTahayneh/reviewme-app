@@ -24,7 +24,7 @@ const signinContent = {
   buttonText: "Sign In",
 };
 
-const initial: User = {
+const initial = {
   email: "",
   password: "",
   firstName: "",

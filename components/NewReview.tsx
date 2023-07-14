@@ -40,7 +40,7 @@ const STORES = [
   "Other",
 ];
 
-const NewReview = ({ user, pageLink }: { user: User; pageLink: string }) => {
+const NewReview = ({ user, pageLink }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [signInModal, setIsSignInModal] = useState(false);
   const [images, setImages] = useState<File[]>([]);

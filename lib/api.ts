@@ -33,7 +33,7 @@ export const register = async ({
   password,
   username,
   email,
-}: User) =>
+}) =>
   await fetcher({
     url: "/api/register",
     method: "POST",
@@ -41,7 +41,7 @@ export const register = async ({
     json: false,
   });
 
-export const signin = async ({ ...props }: User) =>
+export const signin = async ({ ...props }) =>
   await fetcher({
     url: "/api/signin",
     method: "POST",

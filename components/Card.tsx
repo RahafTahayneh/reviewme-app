@@ -6,18 +6,8 @@ import UserProfile from "./UserProfile";
 import { useEffect, useState } from "react";
 import "@/styles/modal.css";
 import ReviewModal from "./ReviewModal";
-import { Review } from "@/types/review";
-import { User } from "@/types/user";
 
-const Card = ({
-  className,
-  review,
-  user,
-}: {
-  className?: string;
-  review: Review;
-  user: User;
-}) => {
+const Card = ({ className, review, user }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
