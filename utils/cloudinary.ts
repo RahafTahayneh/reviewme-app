@@ -10,7 +10,6 @@ export function uploadImage(imageUploaded) {
   return new Promise((resolve, reject) => {
     cloudinary.uploader.upload(imageUploaded[0].filepath, {}, (err, res) => {
       if (err) {
-        console.log("EORORORO", err);
         reject(err);
       }
       resolve(res);

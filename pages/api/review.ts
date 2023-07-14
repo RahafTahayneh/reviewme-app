@@ -114,11 +114,9 @@ async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
     customStore,
   } = req.body;
 
-  console.log(req.body);
   const user = await validateJWT(req.cookies["token"]);
 
   const reviews = await db.review.findMany();
-  console.log(reviews);
   const review = await db.review.create({
     data: {
       rate: rate.toString(),
@@ -139,6 +137,6 @@ async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
     },
   });
   reviews.push(review);
-  console.log(review);
+
   res.status(200).json(review);
 }
