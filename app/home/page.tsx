@@ -11,22 +11,22 @@ import { cookies } from "next/headers";
 import { db } from "@/lib/db";
 import NewReview from "@/components/NewReview";
 
-// const getData = async () => {
-//   await delay(2000);
-//   const user = await getUserFromCookie(cookies());
-//   const reviews = await db.review.findMany({
-//     orderBy: { createdAt: "desc" },
-//     include: {
-//       user: true, // Include the related user object
-//       image: true,
-//     },
-//   });
+const getData = async () => {
+  await delay(2000);
+  const user = await getUserFromCookie(cookies());
+  const reviews = await db.review.findMany({
+    orderBy: { createdAt: "desc" },
+    include: {
+      user: true, // Include the related user object
+      image: true,
+    },
+  });
 
-//   return { reviews, user };
-// };
+  return { reviews, user };
+};
 
 export default async function Page() {
-  // const { reviews, user } = await getData();
+  const { reviews, user } = await getData();
 
   return (
     <div className="flex flex-col m-4">
@@ -40,9 +40,9 @@ export default async function Page() {
             heard. Your feedback matters, and together, we can create a hub of
             valuable insights for online shoppers worldwide.
           </div>
-          {/* <div>
+          <div>
             <NewReview user={user} pageLink="/home" />
-          </div> */}
+          </div>
         </div>
         <div className="animation">
           <LottieAnimation animationData={welcomeAnimation} className="" />
@@ -58,7 +58,7 @@ export default async function Page() {
             </Button>
           </Link>
         </div>
-        {/* <div className="flex flex-row items-center pt-8 flex flex-wrap -mx-4">
+        <div className="flex flex-row items-center pt-8 flex flex-wrap -mx-4">
           {reviews.slice(0, 6).map((review) => (
             <div
               key={review.id}
@@ -67,7 +67,7 @@ export default async function Page() {
               <Card review={review} user={user} className="" />
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
     </div>
   );
