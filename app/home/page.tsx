@@ -40,9 +40,9 @@ export default async function Page() {
             heard. Your feedback matters, and together, we can create a hub of
             valuable insights for online shoppers worldwide.
           </div>
-          <div>
+          {/* <div>
             <NewReview user={user} pageLink="/home" />
-          </div>
+          </div> */}
         </div>
         <div className="animation">
           <LottieAnimation animationData={welcomeAnimation} className="" />
