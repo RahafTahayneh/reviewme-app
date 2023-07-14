@@ -11,14 +11,17 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en">
       <head />
-      <body className="h-screen w-screen home  flex flex-col">
-        <div className="p-6">
-          <Header user={user} />
+      <body className="h-screen w-screen home  flex flex-col  h-full">
+        <div className=" flex flex-col h-full">
+          <div className="p-6">
+            <Header user={user} />
+          </div>
+          <div className="px-6 middle">{children}</div>
+          <div className="">
+            <Footer />
+          </div>
         </div>
-        <div className="px-6">{children}</div>
-        <div className="">
-          <Footer />
-        </div>
+
         <div id="modal"></div>
         <div id="reviewModal"></div>
       </body>
