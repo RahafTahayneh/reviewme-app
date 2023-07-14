@@ -18,11 +18,11 @@ export default async function Page() {
         </h1>
         <p className="text-gray-700 mb-8">
           <span className="font-custom"> Review me</span> is an innovative
-          platform that allows users to submit reviews about products they've
-          bought online from various e-commerce websites worldwide. We aim to
-          provide a comprehensive and reliable source of user-generated reviews
-          to help shoppers make informed decisions before purchasing products
-          online.
+          platform that allows users to submit reviews about products
+          they&apos;ve bought online from various e-commerce websites worldwide.
+          We aim to provide a comprehensive and reliable source of
+          user-generated reviews to help shoppers make informed decisions before
+          purchasing products online.
         </p>
         <h2 className="text-2xl font-bold mb-3">How it Works</h2>
         <p className="text-gray-700 mb-6">

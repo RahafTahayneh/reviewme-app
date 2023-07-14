@@ -8,8 +8,8 @@ export default async function Page() {
           <h1 className="text-3xl font-bold mb-5">Contact Us</h1>
           <p className="text-gray-700 mb-8">
             Have questions, suggestions, or feedback? We would love to hear from
-            you. Fill out the form below, and we'll get back to you as soon as
-            possible.
+            you. Fill out the form below, and we&apos;ll get back to you as soon
+            as possible.
           </p>
           <div className="max-w-md mx-auto">
             <form>
