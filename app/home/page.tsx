@@ -59,7 +59,7 @@ export default async function Page() {
           </Link>
         </div>
         <div className="flex flex-row items-center pt-8 flex flex-wrap -mx-4">
-          {reviews.map((review) => (
+          {reviews.slice(0, 6).map((review) => (
             <div
               key={review.id}
               className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-4 mb-8"
