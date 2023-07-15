@@ -12,6 +12,7 @@ import StarRating from "./StarRating";
 import UserProfile from "./UserProfile";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { updateReviewById } from "@/lib/api";
+import { formatCreatedAtDate } from "@/utils/formatDate";
 
 Modal.setAppElement("#modal");
 
@@ -144,7 +145,9 @@ const ReviewModal = ({
               <div className="text-md text-gray-300 mr-10 w-[100px]">
                 Created At
               </div>
-              <div className="text-md">{"7 hours ago"}</div>
+              <div className="text-md">
+                {formatCreatedAtDate(review.createdAt)}
+              </div>
             </div>
           </div>
           <div className="flex flex-col border-opacity-50 py-6">

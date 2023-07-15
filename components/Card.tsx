@@ -6,6 +6,7 @@ import UserProfile from "./UserProfile";
 import { useEffect, useState } from "react";
 import "@/styles/modal.css";
 import ReviewModal from "./ReviewModal";
+import { formatCreatedAtDate } from "@/utils/formatDate";
 
 const Card = ({ className, review, user }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -50,7 +51,9 @@ const Card = ({ className, review, user }) => {
           />
         </div>
         <div>
-          <div className="font-bold text-lg">{review?.title}</div>
+          <div className="font-bold text-lg h-[60px] overflow-hidden overflow-ellipsis text-center">
+            {review?.title}
+          </div>
           {isSmallScreen ? (
             <>
               <div className="flex flex-row items-center py-2">
@@ -68,7 +71,7 @@ const Card = ({ className, review, user }) => {
                 </div>
                 <div className="rounded-full h-1 w-1 ml-2 dot" />
                 <div className="text-sm user text-left mx-1 whitespace-nowrap">
-                  {"7 hours ago"}
+                  {formatCreatedAtDate(review.createdAt)}
                 </div>
               </div>
             </>
@@ -86,14 +89,14 @@ const Card = ({ className, review, user }) => {
               </div>
               <div className="rounded-full h-1 w-1 ml-2 dot" />
               <div className="text-sm user text-left mx-1 whitespace-nowrap">
-                {"7 hours ago"}
+                {formatCreatedAtDate(review.createdAt)}
               </div>
             </div>
           )}
           <div>
             <StarRating rating={Number(review.rate)} />
           </div>
-          <div className="text-gray-700 text-sm mt-2 mb-8">
+          <div className="text-gray-700 text-sm mt-2 mb-8 overflow-ellipsis h-[100px] overflow-hidden">
             {review?.feedback}
           </div>
         </div>

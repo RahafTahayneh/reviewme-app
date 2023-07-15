@@ -14,8 +14,8 @@ const Header = ({ user }) => {
   };
 
   return (
-    <header className="flex flex-row items-center justify-between px-4 primaryText">
-      <div className="container mx-auto flex items-center justify-between">
+    <header className="flex flex-row items-center justify-between px-4 primaryText w-full">
+      <div className=" mx-auto flex items-center justify-between w-full">
         <div className="flex items-center">
           <Link href="/home" legacyBehavior>
             <h1 className="text-xl font-bold ml-2 header font-custom cursor-pointer">

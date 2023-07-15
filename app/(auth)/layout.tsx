@@ -10,7 +10,7 @@ const AuthRootLayout = async ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en">
       <head />
-      <body className="h-screen w-screen rainbow-mesh p-6">
+      <body className="h-screen w-screen rainbow-mesh p-6 overflow-hidden">
         <Header user={user} />
         <GlassPane className="w-full h-full flex items-center justify-center">
           {children}

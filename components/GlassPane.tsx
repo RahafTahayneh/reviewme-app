@@ -9,12 +9,7 @@ interface Props {
 
 const GlassPane = ({ className, children }: Props) => {
   return (
-    <div
-      className={clsx(
-        "glass rounded-2xl border-solid border-2 border-gray-200 rainbow-mesh",
-        className
-      )}
-    >
+    <div className={clsx("glass rounded-2xl  rainbow-mesh", className)}>
       {children}
     </div>
   );
