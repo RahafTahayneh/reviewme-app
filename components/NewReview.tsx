@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { BiPlus } from "react-icons/bi";
 import Modal from "react-modal";
 import Button from "./Button";
@@ -51,6 +51,7 @@ const NewReview = ({ user, pageLink }) => {
   const [rating, setRating] = useState(0);
   const [productLink, setProductLink] = useState("");
   const [productName, setProductName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -82,6 +83,7 @@ const NewReview = ({ user, pageLink }) => {
     formData.append("image", images[0]);
 
     try {
+      setLoading(true);
       const response = await uploadImage(formData);
       const image = await response.json();
       const newObj = {
@@ -96,7 +98,13 @@ const NewReview = ({ user, pageLink }) => {
       };
 
       await createNewReview(newObj);
-
+      router.push(pageLink);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error saving review:", error);
+      // Handle error and display an error message to the user
+    } finally {
+      closeModal();
       setImages([]);
       setTitle("");
       setFeedback("");
@@ -105,12 +113,7 @@ const NewReview = ({ user, pageLink }) => {
       setRating(0);
       setProductLink("");
       setProductName("");
-    } catch (error) {
-      console.error("Error saving review:", error);
-      // Handle error and display an error message to the user
-    } finally {
-      closeModal();
-      router.push(pageLink);
+      setLoading(false);
     }
   };
 
@@ -363,15 +366,27 @@ const NewReview = ({ user, pageLink }) => {
                     </div>
                     {/* absolute bottom-0 right-2 */}
                     <div className="flex flex-row justify-end mt-10">
-                      <button
-                        type="submit"
-                        className={`custom-button text-white p-10 rounded-md   ${
-                          !isFormValid() && "opacity-50 pointer-events-none"
-                        }`}
-                        disabled={!isFormValid()}
-                      >
-                        Submit
-                      </button>
+                      {loading ? (
+                        <button
+                          type="submit"
+                          className={
+                            "custom-button text-white p-10 rounded-md pointer-events-none flex flex-row items-center opacity-50"
+                          }
+                          disabled={true}
+                        >
+                          Submit
+                        </button>
+                      ) : (
+                        <button
+                          type="submit"
+                          className={`custom-button text-white p-10 rounded-md   ${
+                            !isFormValid() && "opacity-50 pointer-events-none"
+                          }`}
+                          disabled={!isFormValid()}
+                        >
+                          Submit
+                        </button>
+                      )}
                     </div>
                   </div>
                 </form>

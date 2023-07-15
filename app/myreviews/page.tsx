@@ -28,7 +28,12 @@ export default async function Page() {
   return (
     <div className="flex flex-col h-full w-full">
       <div className="text-3xl font-bold  border-solid border-gray  border-b-2 p-2 flex flex-row justify-between items-center mx-2">
-        <div>My Reviews</div>
+        <div>My Reviews</div>{" "}
+        {reviews.length !== 0 && (
+          <div>
+            <NewReview user={user} pageLink="/myreviews" />
+          </div>
+        )}
       </div>
       {reviews?.length !== 0 ? (
         <div className="flex flex-row items-center pt-8 flex flex-wrap">
