@@ -15,7 +15,7 @@ const RootReviewLayout = async ({ children }: { children: ReactNode }) => {
         <div className="p-6">
           <Header user={user} />
         </div>
-        <div className="px-6">{children}</div>
+        <div className="px-6 middle">{children}</div>
         <div>
           <Footer />
         </div>

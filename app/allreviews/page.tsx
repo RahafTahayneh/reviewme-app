@@ -4,6 +4,7 @@ import { delay } from "@/lib/async";
 import { getUserFromCookie } from "@/lib/auth";
 import { cookies } from "next/headers";
 import { db } from "@/lib/db";
+import NewReview from "@/components/NewReview";
 
 const getData = async () => {
   await delay(2000);
@@ -27,16 +28,28 @@ export default async function Page() {
       <div className="text-3xl font-bold  border-solid border-gray  border-b-2 pb-2">
         Recently Added{" "}
       </div>
-      <div className="flex flex-row items-center pt-8 flex flex-wrap -mx-4">
-        {reviews.map((review) => (
-          <div
-            key={review.id}
-            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-4 mb-8"
-          >
-            <Card review={review} user={user} className="" />
+      {reviews?.length !== 0 ? (
+        <div className="flex flex-row items-center pt-8 flex flex-wrap">
+          {reviews?.map((review) => (
+            <div
+              key={review.id}
+              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-4 mb-8"
+            >
+              <Card review={review} user={user} className="" />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col justify-center items-center h-full w-full">
+          <div className="text-2xl text-gray-400 max-w-[500px] text-center pt-16">
+            No submitted reviews, Share your experience and help others by
+            submitting a new review on our website.
           </div>
-        ))}
-      </div>
+          <div className="my-8">
+            <NewReview user={user} pageLink="/allreviews" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
